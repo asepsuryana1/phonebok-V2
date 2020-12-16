@@ -1,21 +1,20 @@
 import React from 'react';
 
 const User = (props) => {
-  return(
+  return (
     <tr>
-      <th scope="row">{props.id}</th>
-      <td>{props.nama}</td>
-      <td>{props.phone}</td>
-      <td>
-        <button
-        type="button"
-        className="btn btn-success"
-        onClick={props.sent ? props.onDelete : props.resend}>
-        {props.sent ? 'Hapus' : 'Kirim Ulang'}
-        </button>
+      <th>{props.index}</th>
+      <th>{props.nama}</th>
+      <th>{props.phone}</th>
+      <td style={{textAlign:'center'}}>{props.sent
+        ? (<button style={{marginRight:'6px'}}type="button" className="btn theme" onClick={props.onDelete}><i className="fas fa-trash"></i> Delete</button>)
+
+        : (<button type="submit" className="btn theme" onClick={props.onResend}><i className="fas fa-sync-alt"></i>Resend</button>)
+      }
+        <button type="button" className="btn theme" onClick={props.onUpdateContact}><i className="fas fa-pencil-alt"></i> Update </button>
       </td>
       {!props.sent &&
-        <td style={{color: "red", fontSize: "8px"}}>
+        <td style={{ color: "red", fontSize: "8px" }}>
           network failed, please check your connections
         </td>
       }

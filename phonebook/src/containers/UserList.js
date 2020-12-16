@@ -5,48 +5,57 @@ import { loadUser } from '../actions'
 
 class UserList extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.loadUser();
   }
 
-  render(){
-    const nodes = this.props.users.map((item, index)=>{
+  render() {
+    const nodes = this.props.users.map((item, index) => {
       return (
         <User
-        key={index}
-        id={item.id}
-        nama={item.nama}
-        phone={item.phone}
-        sent={item.sent}
+          key={index}
+          id={item.id} index={index + 1}
+          nama={item.nama}
+          phone={item.phone}
+          sent={item.sent}
         />)
-      })
-      return(
-        <table className="table table-striped table-dark">
-          <thead>
+    })
+    // <Phone
+    // key={index}
+    // id={item.id} index={index + 1}
+    // Name={item.Name}
+    // Number={item.Number}
+    // sent={item.sent} />
+    return (
+      <div className="container theme">
+        <br></br>
+        <table className="table">
+          <thead >
             <tr>
-              <th scope="col">id</th>
-              <th scope="col">nama</th>
-              <th scope="col">phone</th>
-              <th scope="col">Actions</th>
+              <th >#</th>
+              <th style={{ textAlign: 'left',width: '25%' }}>Nama</th>
+              <th style={{ textAlign: 'left',width: '25%' }}>No.Telp</th>
+              <th style={{ textAlign: 'center', width: '40%' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {nodes}
           </tbody>
         </table>
-      )
-    }
+      </div>
+    )
   }
+}
 
-  const mapStateToProps = (state) => ({
-    users: state.users
-  })
+const mapStateToProps = (state) => ({
+  users: state.users
+})
 
-  const mapDispatchToProps = (dispatch) => ({
-    loadUser: () => dispatch(loadUser())
-  })
+const mapDispatchToProps = (dispatch) => ({
+  loadUser: () => dispatch(loadUser())
+})
 
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(UserList)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserList)

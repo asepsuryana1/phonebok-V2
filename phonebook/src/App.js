@@ -1,20 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-import PhoneBox from './components/PhoneBox';
+import UserBox from './components/UserBox';
+
 
 function App() {
   return (
     <div className="dS">
-    <div className="App App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <div className="card-header text-center">
-      <div className="asa">
-        <h1 className="App"> <i className="fa fa-address-book"></i> Phones Book</h1>
-        <PhoneBox />
-      </div>
+      <div className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <div className="asa">
+          <h1> <i className="fa fa-address-book"></i> Phones Book</h1>
+          <UserBox />
+        </div>
       </div>
     </div>
-    </div>
+
   );
 }
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { postUser } from '../actions'
 
 class UserForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       id: "",
@@ -11,59 +11,65 @@ class UserForm extends Component {
       phone: ""
     }
 
-    this.handleidChange = this.handleidChange.bind(this);
+    //this.handleidChange = this.handleidChange.bind(this);
     this.handlenamaChange = this.handlenamaChange.bind(this);
     this.handlephoneChange = this.handlephoneChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleidChange(event){
-    this.setState({id: event.target.value});
+  handleidChange(event) {
+    this.setState({ id: event.target.value });
   }
 
-  handlenamaChange(event){
-    this.setState({nama: event.target.value});
+  handlenamaChange(event) {
+    this.setState({ nama: event.target.value,id: event.target.value });
   }
 
-  handlephoneChange(event){
-    this.setState({phone: event.target.value});
+  handlephoneChange(event) {
+    this.setState({ phone: event.target.value });
   }
 
-  handleSubmit(event){
-    if(this.state.id && this.state.nama && this.state.phone){
+  handleSubmit(event) {
+    if (this.state.id && this.state.nama && this.state.phone) {
       this.props.postUser(this.state.id, this.state.nama, this.state.phone)
-      this.setState({id: "", nama: "", phone: ""});
+      this.setState({ id: "", nama: "", phone: "" });
     }
     event.preventDefault();
   }
 
-  render(){
-    return(
+  render() {
+    return (
+
+
       <form onSubmit={this.handleSubmit}>
-        <div className="form-group row">
-          <label htmlFor="id" className="col-sm-2 col-form-label">id</label>
-          <div className="col-sm-10">
-            <input type="text" className="form-control" id="id" name="id" value={this.state.id} onChange={this.handleidChange} placeholder="id" />
-          </div>
+        <div>
+          <p className="float-right">
+            <button className="btn theme" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
+              <i className="fas fa-plus"></i> Add
+                        </button>
+            <button className="btn theme" style={{ marginLeft: "6px" }} onClick={this.handleButtonSearch} type="button" data-toggle="collapse" data-target="#searchForm" aria-expanded="false" aria-controls="searchForm">
+              <i className="fas fa-search"></i> Search
+                        </button>
+          </p>
         </div>
-        <div className="form-group row">
-          <label htmlFor="nama" className="col-sm-2 col-form-label">nama</label>
-          <div className="col-sm-10">
-            <input type="text" className="form-control" id="nama" name="nama" value={this.state.nama} onChange={this.handlenamaChange} placeholder="nama"/>
+        <div className="collapse container btn theme" id="addForm">
+          <h5 className="" style={{ color: "white" }}>Add Contact</h5>
+          {/* <div className=" theme btn">
+            <input type="text" name="id" value={this.state.id} onChange={this.handleidChange} className="theme btn" style={{color:"white"}}placeholder="id Here" required />
+          </div> */}
+          <div className="theme btn">
+            <input type="text" name="nama" value={this.state.nama} onChange={this.handlenamaChange} className="theme btn" placeholder="name Here" required />
           </div>
-        </div>
-        <div className="form-group row">
-          <label htmlFor="phone" className="col-sm-2 col-form-label">phone</label>
-          <div className="col-sm-10">
-            <input type="text" className="form-control" id="phone" name="phone" value={this.state.phone} onChange={this.handlephoneChange} placeholder="phone"/>
+          <div className="theme btn">
+            <input type="text" name="phone" value={this.state.phone} onChange={this.handlephoneChange} className="theme btn" placeholder="Phone Number Here" required />
           </div>
+          <button type="submit" className="btn theme"> <i className="fas fa-save"></i> Save</button>
+          <button type="button" onClick={this.handleButtonCancel} className="btn theme" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm"><i className="fas fa-times"></i> Cancel</button>
         </div>
-        <div className="form-group row">
-          <div className="col-sm-10">
-            <button type="submit" className="btn btn-primary">Tambah</button>
-          </div>
-        </div>
-      </form>
+
+
+      </form >
+
     )
   }
 }

@@ -6,8 +6,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
+.theme{
+  color: hsl(0, 0%, 96%);
+  border-style: solid;
+  border-radius: 5px;
+  border-color: lavender;
+ }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
