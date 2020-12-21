@@ -1,10 +1,24 @@
-const users = (state = [], action) => {
+const initState = {
+  users: [],
+  page: 1,
+  pages: 0,
+  isSearch: false,
+  filtername: '',
+  filterPhone: ''
+}
+
+
+
+const users = (state = initState, action) => {
   switch (action.type) {
     case 'LOAD_USER_SUCCESS':
-    return action.users.map((item)=>{
+    return {
+      ...state,
+    users : action.users.map((item)=>{
       item.sent = true;
       return item
     })
+    }
 
     case 'POST_USER':
     return [
