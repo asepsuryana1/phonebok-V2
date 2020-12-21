@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import UserList from '../containers/UserList';
-import UserForm from '../containers/UserForm';
+import UserFormAdd from '../containers/UserFormAdd';
 
 export default class UserBox extends Component {
   render() {
     return (
       <div>
         <div>
-          <UserForm />
+          <UserFormAdd />
         </div>
         <div className="container theme btn">
           <UserList />

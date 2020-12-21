@@ -11,7 +11,7 @@ const User = (props) => {
 
         : (<button type="submit" className="btn theme" onClick={props.onResend}><i className="fas fa-sync-alt"></i>Resend</button>)
       }
-        <button type="button" className="btn theme" onClick={props.onUpdateContact}><i className="fas fa-pencil-alt"></i> Update </button>
+        <button type="button" className="btn theme" onClick={props.onUpdateUser}><i className="fas fa-pencil-alt"></i> Update </button>
       </td>
       {!props.sent &&
         <td style={{ color: "red", fontSize: "8px" }}>

@@ -1,10 +1,10 @@
 const initState = {
   users: [],
-  page: 1,
-  pages: 0,
-  isSearch: false,
-  filtername: '',
-  filterPhone: ''
+  // page: 1,
+  // pages: 0,
+  // isSearch: false,
+  // filternama: '',
+  // filterPhone: ''
 }
 
 
@@ -44,9 +44,69 @@ const users = (state = initState, action) => {
       }
       return item
     })
+//===============================================
+    case 'ON_UPDATE_USER':
+      return {
+        ...state,
+        users: state.users.map((item) => {
+          if (item.id === action.id) {
+            item.isEditing = true;
+          }
+          console.log(item);
+          
+          return item
+        })
+      }
 
+    case 'OFF_UPDATE_USER':
+      return {
+        ...state,
+        users: state.users.map((item) => {
+          if (item.id === action.id) {
+            item.isEditing = false;
+          }
+          return item
+        })
+      }
+
+    case 'UPDATE_USER':
+      return {
+        ...state,
+        users: state.users.map(item => {
+          if (item.id === action.id) {
+            item.nama = action.nama;
+            item.phone = action.phone;
+          }
+          return item
+        })
+      }
+
+    case 'UPDATE_USER_SUCCESS':
+      return {
+        ...state,
+        users: state.users.map(item => {
+          item.sent = true;
+          item.isEditing = false;
+          return item
+        })
+      }
+
+    case 'UPDATE_USER_FAILURE':
+      return {
+        ...state,
+        users: state.users.map((item) => {
+          if (item.id === action.id) {
+            item.sent = false;
+          }
+          return item
+        })
+      }
+
+//======================================================
     case 'DELETE_USER':
-    return state.filter((item) => item.id !== action.id)
+    return {
+      ...state,
+      users: state.users.filter((item) => item.id !== action.id)}
 
     case 'DELETE_USER_SUCCESS':
     return state
@@ -56,6 +116,9 @@ const users = (state = initState, action) => {
     default:
     return state
   }
+  
 }
+
+
 
 export default users

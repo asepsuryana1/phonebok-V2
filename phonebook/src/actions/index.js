@@ -1,5 +1,6 @@
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
+import Swal from 'sweetalert2';
 
 const API_URL = 'http://localhost:3001/graphql/'
 
@@ -157,5 +158,78 @@ export const resendUser = (id, nama, phone) => {
       console.error(error);
       dispatch(postUserFailure(id))
     });
+  }
+}
+
+
+//START EDIT users DATA
+
+export const onUpdateUser = (id) => ({
+  type: 'ON_UPDATE_USER',
+  id
+})
+
+export const offUpdateUser = (id) => ({
+  type: 'OFF_UPDATE_USER',
+  id
+})
+
+const updateUserSuccess = (users) => ({
+  type: 'UPDATE_USER_SUCCESS',
+  users
+})
+
+const updateUserFailure = (id) => ({
+  type: 'UPDATE_USER_FAILURE',
+  id
+})
+
+const updateUserRedux = (id, name, phone) => ({
+  type: 'UPDATE_USER', 
+  id,
+  name,
+  phone
+})
+
+export const updateUser = (id, name, phone) => {
+  return dispatch => {
+     dispatch(updateUserRedux(id, name, phone));
+     const updateQuery = gql`
+     mutation updateUser($id: ID!, $name: String!, $phone: String!) {
+       updateUser(id: $id, name: $name, phone: $phone ) {
+         id
+         name
+         phone
+       }
+     }
+   `;
+
+     return client.mutate({
+        mutation: updateQuery,
+        variables: {
+           id,
+           name,
+           phone
+        }
+     })
+        .then(function (response) {
+           Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'users updated successfully!',
+              showConfirmButton: false,
+              timer: 1200
+           })
+           dispatch(updateUserSuccess(response.data.updateUser))
+        })
+        .catch(function (error) {
+           Swal.fire({
+              icon: 'error',
+              title: 'There is a problem',
+              text: 'Something went wrong! check your connection',
+              showConfirmButton: true
+           })
+           dispatch(updateUserFailure(id))
+        });
   }
 }

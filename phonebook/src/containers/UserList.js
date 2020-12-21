@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import User from './UserActive';
 import { connect } from 'react-redux';
 import { loadUser } from '../actions'
+import EditForm from './UserFormEdit'
 
 class UserList extends Component {
 
@@ -11,7 +12,18 @@ class UserList extends Component {
 
   render() {
     const nodes = this.props.users.map((item, index) => {
-      return (
+      return  item.isEditing ? (
+        <EditForm
+          key={index}
+          //index={this.props.page === 1 ? index + 1 : (this.props.page - 1) * 5 + (index + 1)}
+          id={item.id}
+          nama={item.nama}
+          phone={item.phone}
+          sent={item.sent}
+          edit={item.isEditing}
+        />
+      )
+      :(
         <User
           key={index}
           id={item.id} index={index + 1}
@@ -23,7 +35,7 @@ class UserList extends Component {
     // <Phone
     // key={index}
     // id={item.id} index={index + 1}
-    // Name={item.Name}
+    // nama={item.nama}
     // Number={item.Number}
     // sent={item.sent} />
     return (
